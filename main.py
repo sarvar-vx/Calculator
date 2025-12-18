@@ -4,7 +4,7 @@ from customtkinter import CTkLabel
 app = ctk.CTk()
 app.title("Calculator")
 app.geometry("310x520")
-app.resizable(False, False)
+# app.resizable(False, False)
 
 entry = ctk.CTkEntry(
     app,
