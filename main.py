@@ -27,6 +27,7 @@ def button_click(value):
 
     if value == "C":
         entry.delete(0, "end")
+        entry.insert(0, "0")
     elif value == "⌫":
         if not entry.get():
             return
