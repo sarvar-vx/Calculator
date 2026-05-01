@@ -1,11 +1,17 @@
 import customtkinter as ctk
 from customtkinter import CTkLabel
 
+
+# Root settings
+# ----------------------------------------------------------------------------------------------------------------------
 app = ctk.CTk()
 app.title("Calculator")
 app.geometry("310x520")
-# app.resizable(False, False)
+app.resizable(False, False)
 
+
+# Entry
+# ----------------------------------------------------------------------------------------------------------------------
 entry = ctk.CTkEntry(
     app,
     width=290,
@@ -21,6 +27,9 @@ entry = ctk.CTkEntry(
 entry.insert(0, "0")
 entry.pack(pady=20)
 
+
+# Button click
+# ----------------------------------------------------------------------------------------------------------------------
 def button_click(value):
     if entry.get() in ["Error", "0"] and value not in ["=", "C", "⌫"]:
         entry.delete(0, "end")
@@ -55,44 +64,9 @@ def button_click(value):
             if endy not in ["+", "-", "*", "/", "%", "."]:
                 entry.insert("end", value)
 
-def key_event(event):
-    key = event.keysym
 
-    if key in "0123456789":
-        entry.insert("end", key)
-    elif key in ["plus", "KP_Add"]:
-        if not entry.get():
-            return
-        endy = entry.get()[-1]
-        if endy not in ["+", "-", "*", "/", "%", "."]:
-            entry.insert("end", "+")
-    elif key in ["minus", "KP_Subtract"]:
-        if not entry.get():
-            return
-        endy = entry.get()[-1]
-        if endy not in ["+", "-", "*", "/", "%", "."]:
-            entry.insert("end", "-")
-    elif key in ["asterisk", "KP_Multiply"]:
-        if not entry.get():
-            return
-        endy = entry.get()[-1]
-        if endy not in ["+", "-", "*", "/", "%", "."]:
-            entry.insert("end", "*")
-    elif key in ["slash", "KP_Divide"]:
-        if not entry.get():
-            return
-        endy = entry.get()[-1]
-        if endy not in ["+", "-", "*", "/", "%", "."]:
-            entry.insert("end", "/")
-    elif key == "Return":
-        button_click("=")
-    elif key == "BackSpace":
-        button_click("⌫")
-    elif key == "Escape":
-        button_click("C")
-    elif key == "period" or key == "KP_Decimal":
-        entry.insert("end", ".")
-
+# Buttons
+# ----------------------------------------------------------------------------------------------------------------------
 buttons = [
     ["C", "⌫", "%", "/"],
     ["7", "8", "9", "*"],
@@ -101,9 +75,15 @@ buttons = [
     ["00", "0", ".", "="]
 ]
 
+
+# Frame for buttons
+# ----------------------------------------------------------------------------------------------------------------------
 frame = ctk.CTkFrame(app)
 frame.pack()
 
+
+# Button placement
+# ----------------------------------------------------------------------------------------------------------------------
 for i, row in enumerate(buttons):
     for j, text in enumerate(row):
         if text in ["+", "-", "*", "/", "=", "%"]:
@@ -130,10 +110,14 @@ for i, row in enumerate(buttons):
         )
         btn.grid(row=i, column=j, padx=5, pady=5)
 
-app.bind("<Key>", key_event)
 
+# My little company
+# ----------------------------------------------------------------------------------------------------------------------
 text = "Created by CLX | Simple ideas, Real products."
 footer = CTkLabel(app, text=text, font=("Arial", 10), text_color="#bdc3c7")
 footer.pack(pady=10)
 
+
+# Ending
+# ----------------------------------------------------------------------------------------------------------------------
 app.mainloop()
